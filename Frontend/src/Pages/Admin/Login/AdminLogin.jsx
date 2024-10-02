@@ -15,7 +15,7 @@ const AdminLogin = () => {
           <span>Password:</span>
           <input type="password" placeholder="Password" className="input-field" />
         </label>
-        <button type="submit" className="login-btn">LOGIN</button>
+        <button type="submit" className="admin-login-btn">LOGIN</button>
       </form>
     </div>
   </div>
