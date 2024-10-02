@@ -1,14 +1,14 @@
 import React from "react";
-import "./SignupAndLogin.css";
+import "./Button.css";
 
-const SignupAndLogin = () => {
+const Button = ({label}) => {
   return (
     <div>
       <button type="submit" className="login-btn">
-        LOGIN
+        {label}
       </button>
     </div>
   );
 };
 
-export default SignupAndLogin;
+export default Button;

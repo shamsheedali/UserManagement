@@ -68,7 +68,13 @@ const login = async (req, res) => {
   }
 };
 
+
+const profile = (req, res) => {
+  res.status(200).json({message: "Token verified, Profile Page Success"})
+}
+
 module.exports = {
   registerUser,
   login,
+  profile
 };

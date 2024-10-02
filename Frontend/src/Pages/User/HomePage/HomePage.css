@@ -1,5 +1,5 @@
 /* General Styling */
-body {
+.home-outer-container {
   margin: 0;
   font-family: "Arial", sans-serif;
   background-color: #69b345;
@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
 
 .home-container {
@@ -24,6 +25,19 @@ body {
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 300px;
+}
+
+/* Profile Image Container */
+.profile-image-container {
+  margin-bottom: 20px;
+}
+
+/* Profile Image */
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover;
 }
 
 /* Welcome Message */
@@ -48,4 +62,22 @@ h1 {
 
 .profile-btn:hover {
   background-color: #388e3c;
+}
+
+/* Logout Button */
+.logout-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #e53935;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c62828;
 }

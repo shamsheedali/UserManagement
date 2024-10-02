@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../../../Components/Buttons/Button";
 
 const Signup = () => {
+
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,10 +29,13 @@ const Signup = () => {
       if (response.status === 201) {
         alert("Signup Successfull");
         console.log("Signup Successfull");
+        localStorage.setItem('token', response.data.token);
 
         setUsername("");
         setEmail("");
         setPassword("");
+
+        navigate('/');
       }
     } catch (error) {
       console.error("Error signing up:", error);
@@ -65,9 +72,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit" className="signup-btn">
-              SIGN UP
-            </button>
+            <Button label={"SIGN UP"} />
           </form>
           <div className="login-link">
             <p>

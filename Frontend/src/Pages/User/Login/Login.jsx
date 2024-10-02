@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./Login.css";
-import SignupAndLogin from "../../../Components/Buttons/SignupAndLogin";
+import Button from "../../../Components/Buttons/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,9 +26,12 @@ const Login = () => {
       if (response.status === 200) {
         alert("Login Successfull");
         console.log("Login Successfull");
+        localStorage.setItem('token', response.data.token);
 
         setEmail("");
         setPassword("");
+
+        navigate('/');
       }
     } catch (error) {
       console.error("Error Loging in", error);
@@ -54,7 +60,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <SignupAndLogin />
+            <Button label={"LOGIN"} />
           </form>
           <div className="signup-link">
             <p>
