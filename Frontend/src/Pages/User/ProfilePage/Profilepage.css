@@ -1,0 +1,91 @@
+/* General Styling */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #69b345;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .profile-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+  }
+  
+  /* Image Upload */
+  .image-upload {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .upload-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    border: 2px dashed #69b345;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .upload-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #aaa;
+  }
+  
+  .file-input {
+    display: none; /* Hide the default file input */
+  }
+  
+  /* Profile Image */
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .profile-info label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .input-field {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border: 1px solid #69b345;
+  }
+  
