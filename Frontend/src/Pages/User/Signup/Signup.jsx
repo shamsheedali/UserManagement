@@ -3,6 +3,7 @@ import "./Signup.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Components/Buttons/Button";
+import { toast } from "react-toastify";
 
 const Signup = () => {
 
@@ -27,7 +28,7 @@ const Signup = () => {
       console.log(response.data); // Handle success
 
       if (response.status === 201) {
-        alert("Signup Successfull");
+        toast.success("Signup Successfull");
         console.log("Signup Successfull");
         localStorage.setItem('token', response.data.token);
 
@@ -39,7 +40,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      alert("Signup Failed. Try again.");
+      toast.error("Signup Failed. Try again.");
     }
   };
 

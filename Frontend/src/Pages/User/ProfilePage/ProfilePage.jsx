@@ -4,6 +4,7 @@ import Button from "../../../Components/Buttons/Button";
 import defaultPhoto from "../../../Assets/ProfilePic.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -59,11 +60,12 @@ const ProfilePage = () => {
         },
       });
       console.log(response.data);
-      alert("Profile image uploaded successfully!");
+      toast.success("Profile image uploaded successfully!");
 
       navigate("/");
     } catch (error) {
       console.error("Error uploading image:", error);
+      toast.error("Error uploading image");
     }
   };
 

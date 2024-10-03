@@ -3,6 +3,7 @@ import "./Login.css";
 import Button from "../../../Components/Buttons/Button";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
 
@@ -24,7 +25,7 @@ const Login = () => {
       console.log(response.data);
 
       if (response.status === 200) {
-        alert("Login Successfull");
+        toast.success("Login Successfull");
         console.log("Login Successfull");
         localStorage.setItem('token', response.data.token);
 
@@ -35,7 +36,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error Loging in", error);
-      alert("Login Failed. Try again");
+      toast.error("Login Failed. Try again");
     }
   };
 

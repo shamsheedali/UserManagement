@@ -3,6 +3,7 @@ import "./HomePage.css";
 import defaultPhoto from "../../../Assets/ProfilePic.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const HomePage = () => {
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
+        toast.error("Error fetching profile");
       }
     };
     fetchProfile();
@@ -38,6 +40,13 @@ const HomePage = () => {
   const profileImageSrc = userData.profileImage
     ? `data:image/jpeg;base64,${userData.profileImage}`
     : defaultPhoto;
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toast.success("Logout Successfull");
+    navigate('/login');
+  }
 
   return (
     <div className="home-outer-container">
@@ -55,7 +64,7 @@ const HomePage = () => {
           <button onClick={handleProfileClick} className="profile-btn">
             Go to Profile
           </button>
-          <button className="logout-btn">Logout</button>
+          <button className="logout-btn" onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>
