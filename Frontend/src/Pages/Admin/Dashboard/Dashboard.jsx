@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import AddUserModal from "../AddUserModal/AddUserModal";
-import axios from 'axios'
+import axios from "axios";
 
 const Dashboard = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
-
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -18,7 +17,7 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUsers(response.data); 
+        setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -41,46 +40,69 @@ const Dashboard = () => {
 
   return (
     <div className="admin-dashboard-container">
-      <h1>Admin Dashboard</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="search-input"
-        />
-        <button className="add-user-btn" onClick={() => setModalOpen(true)}>Add User</button>
-      </div>
-      <table className="user-list">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users
-            .filter(user => user.username.includes(searchQuery))
-            .map(user => (
+      <div className="container">
+        <button className="logout-btn">
+          Logout
+        </button>
+
+        <h2>Admin Dashboard</h2>
+
+        <div className="top-bar">
+          <div className="search-box">
+            <input
+              type="text"
+              id="search"
+              placeholder="Search users..."
+              onChange={handleSearchChange}
+            />
+            <button>Search</button>
+          </div>
+          <button className="add-user-btn">Add User</button>
+        </div>
+
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
               <tr key={user.id}>
+                <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => handleEditUser(user.id)}>Edit</button>
-                  <button className="delete-btn">Delete</button>
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEditUser(user.id)}
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="delete-btn"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
       <AddUserModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         onAddUser={handleAddUser}
       />
     </div>
-  );};
+  );
+};
 
 export default Dashboard;
