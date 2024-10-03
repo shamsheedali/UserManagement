@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import AddUserModal from "../AddUserModal/AddUserModal";
+import axios from 'axios'
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [users, setUsers] = useState([
-    { id: 1, username: 'user1', email: 'user1@example.com' },
-    { id: 2, username: 'user2', email: 'user2@example.com' },
-    { id: 3, username: 'user3', email: 'user3@example.com' },
-  ]);
+  const [users, setUsers] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("/api/admin/get_users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data); 
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -17,10 +33,6 @@ const Dashboard = () => {
 
   const handleEditUser = (id) => {
     console.log(`Edit user with ID: ${id}`);
-  };
-
-  const handleDeleteUser = (id) => {
-    setUsers(users.filter(user => user.id !== id));
   };
 
   const handleAddUser = (newUser) => {
@@ -50,14 +62,14 @@ const Dashboard = () => {
         </thead>
         <tbody>
           {users
-            .filter(user => user.username.includes(searchQuery) || user.email.includes(searchQuery))
+            .filter(user => user.username.includes(searchQuery))
             .map(user => (
               <tr key={user.id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
                   <button className="edit-btn" onClick={() => handleEditUser(user.id)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>Delete</button>
+                  <button className="delete-btn">Delete</button>
                 </td>
               </tr>
             ))}

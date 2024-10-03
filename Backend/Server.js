@@ -1,7 +1,8 @@
 require('dotenv').config()
 const express = require('express');
 const connectDB = require('./db/Connection');
-const userRoute = require("./Router/UserRouter")
+const userRoute = require("./Router/UserRouter");
+const adminRouter = require("./Router/AdminRouter")
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.use(express.json());
 
 //user--route
 app.use('/api/user', userRoute);
+//admin-route
+app.use('/api/admin', adminRouter);
 
 //Database
 connectDB();
