@@ -42,7 +42,31 @@ const fetchUsers = async(req, res) => {
   }
 }
 
+const deleteUser = async(req, res) => {
+  const userId = req.params.id;
+  try {
+    await userSchema.findByIdAndDelete({_id: userId});
+    res.status(200).json({message: "User Deleted Successfully"});
+    console.log("User Deleted Successfully");
+  } catch (error) {
+    res.status(500).json({message: "Unable to Delete User"});
+  }
+}
+
+const editUser = async(req, res) => {
+  const userId = req.params.id;
+  const {username, email} = req.body;
+  try{
+    const updatedUser = await userSchema.findByIdAndUpdate({_id: userId}, {$set:{username, email}}, {new: true});
+    res.status(200).json({message:"User Details Updated", updatedUser});
+  }catch(error) {
+    res.status(500).json({message: "Unable to Edit User"});
+  }
+}
+
 module.exports = {
   login,
-  fetchUsers
+  fetchUsers,
+  deleteUser,
+  editUser
 };

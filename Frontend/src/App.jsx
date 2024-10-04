@@ -7,13 +7,14 @@ import ProfilePage from "./Pages/User/ProfilePage/ProfilePage";
 import AdminLogin from "./Pages/Admin/Login/AdminLogin";
 import Dashboard from "./Pages/Admin/Dashboard/Dashboard";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PrivateRouteAdmin from "./Components/PrivateRouteAdmin/PrivateRouteAdmin";
 
 const App = () => {
   return (
     <div>
-      <ToastContainer theme='dark' />
+      <ToastContainer theme="dark" />
       <Routes>
         {/* user-Routes */}
         <Route
@@ -37,7 +38,14 @@ const App = () => {
 
         {/* Admin-routes */}
         <Route path="/admin_login" element={<AdminLogin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRouteAdmin>
+              <Dashboard />
+            </PrivateRouteAdmin>
+          }
+        />
       </Routes>
     </div>
   );

@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(201).json({ message: "Signup successful", token });
+    res.status(201).json({ message: "Signup successful", token, newUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });

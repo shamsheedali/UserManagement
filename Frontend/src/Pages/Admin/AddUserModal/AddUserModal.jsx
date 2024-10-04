@@ -1,18 +1,39 @@
 import React, { useState } from 'react';
 import './AddUserModal.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const AddUserModal = ({ isOpen, onClose, onAddUser }) => {
+const AddUserModal = ({ isOpen, onClose, onAddUser  }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const formData = {
+    username,
+    email,
+    password
+  }
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    onAddUser({ username, email, password });
-    setUsername('');
-    setEmail('');
-    setPassword('');
-    onClose();
+    try {
+      const response = await axios.post('/api/user/signup', formData); 
+      if(response.status === 201){
+        toast.success("New User Added!");
+        console.log("new user added");
+        localStorage.setItem('token', response.data.token)
+
+        
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        onAddUser(response.data.newUser);
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error Adding user:", error);
+      toast.error("Error Adding New User!!!.");
+    }
   };
 
   if (!isOpen) return null;
